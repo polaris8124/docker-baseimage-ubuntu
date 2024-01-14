@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM alpine:3.17 as rootfs-stage
+FROM alpine:3.17 AS rootfs-stage
 
 # environment
 ENV REL=jammy
@@ -60,11 +60,11 @@ ADD --chmod=744 "https://raw.githubusercontent.com/linuxserver/docker-mods/mod-s
 # set environment variables
 ARG DEBIAN_FRONTEND="noninteractive"
 ENV HOME="/root" \
-  LANGUAGE="en_US.UTF-8" \
-  LANG="en_US.UTF-8" \
+  LANGUAGE="fr_FR.UTF-8" \
+  LANG="fr_FR.UTF-8" \
   TERM="xterm" \
   S6_CMD_WAIT_FOR_SERVICES_MAXTIME="0" \
-  S6_VERBOSITY=1 \
+  S6_VERBOSITY=3 \
   S6_STAGE2_HOOK=/docker-mods \
   VIRTUAL_ENV=/lsiopy \
   PATH="/lsiopy/bin:$PATH"
@@ -119,12 +119,19 @@ RUN \
     gnupg \
     jq \
     netcat \
+    nano  \
+    sudo  \
+    vim \
+    net-tools \
+    iputils-ping \
+    htop \
+    iotop \
     tzdata && \
   echo "**** generate locale ****" && \
-  locale-gen en_US.UTF-8 && \
-  echo "**** create abc user and make our folders ****" && \
-  useradd -u 911 -U -d /config -s /bin/false abc && \
-  usermod -G users abc && \
+  locale-gen fr_FR.UTF-8 && \
+  echo "**** create polaris user and make our folders ****" && \
+  useradd -u 1000 -U -d /home/polaris -s /bin/false polaris && \
+  usermod -G users polaris && \
   mkdir -p \
     /app \
     /config \
