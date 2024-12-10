@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM alpine:3.20 AS rootfs-stage
+FROM alpine:3 AS rootfs-stage
 
 # environment
 ENV REL=noble
